@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/opensim-utils/!svn/ver/6/public/Stanford/Matlab/Preprocessing
+END
+compute_T_at_COP.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/opensim-utils/!svn/ver/1/public/Stanford/Matlab/Preprocessing/compute_T_at_COP.m
+END
+time_data.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/opensim-utils/!svn/ver/1/public/Stanford/Matlab/Preprocessing/time_data.m
+END
+remove_gaps_from_ranges.m
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/opensim-utils/!svn/ver/1/public/Stanford/Matlab/Preprocessing/remove_gaps_from_ranges.m
+END
+fill_gaps.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/opensim-utils/!svn/ver/1/public/Stanford/Matlab/Preprocessing/fill_gaps.m
+END
+prune_short_ranges.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/opensim-utils/!svn/ver/1/public/Stanford/Matlab/Preprocessing/prune_short_ranges.m
+END
+process_grf.m
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/opensim-utils/!svn/ver/1/public/Stanford/Matlab/Preprocessing/process_grf.m
+END
+compute_COP.m
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/opensim-utils/!svn/ver/1/public/Stanford/Matlab/Preprocessing/compute_COP.m
+END
+put_forces_in_mot.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/opensim-utils/!svn/ver/1/public/Stanford/Matlab/Preprocessing/put_forces_in_mot.m
+END
+plot_columns.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/opensim-utils/!svn/ver/1/public/Stanford/Matlab/Preprocessing/plot_columns.m
+END
+indices_to_ranges.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/opensim-utils/!svn/ver/1/public/Stanford/Matlab/Preprocessing/indices_to_ranges.m
+END
+ranges_to_indices.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/opensim-utils/!svn/ver/1/public/Stanford/Matlab/Preprocessing/ranges_to_indices.m
+END
+filter_grf.m
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/opensim-utils/!svn/ver/1/public/Stanford/Matlab/Preprocessing/filter_grf.m
+END
+transform_trcFile.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/opensim-utils/!svn/ver/1/public/Stanford/Matlab/Preprocessing/transform_trcFile.m
+END

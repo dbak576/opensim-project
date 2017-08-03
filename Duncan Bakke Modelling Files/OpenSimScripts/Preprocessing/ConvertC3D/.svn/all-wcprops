@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/opensim-utils/!svn/ver/6/public/Stanford/Matlab/Preprocessing/ConvertC3D
+END
+convertC3DtoTRCandMOT.m
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/opensim-utils/!svn/ver/5/public/Stanford/Matlab/Preprocessing/ConvertC3D/convertC3DtoTRCandMOT.m
+END
+get_GRFTzByLimb.m
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/opensim-utils/!svn/ver/5/public/Stanford/Matlab/Preprocessing/ConvertC3D/get_GRFTzByLimb.m
+END
+writeMarkersToTRC.m
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/opensim-utils/!svn/ver/5/public/Stanford/Matlab/Preprocessing/ConvertC3D/writeMarkersToTRC.m
+END
+writeGRFsToMOT.m
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/opensim-utils/!svn/ver/5/public/Stanford/Matlab/Preprocessing/ConvertC3D/writeGRFsToMOT.m
+END
+rot3DVectors.m
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/opensim-utils/!svn/ver/5/public/Stanford/Matlab/Preprocessing/ConvertC3D/rot3DVectors.m
+END
+readC3D.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/opensim-utils/!svn/ver/5/public/Stanford/Matlab/Preprocessing/ConvertC3D/readC3D.m
+END
+getForcePlatformFromC3DParameters.m
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/opensim-utils/!svn/ver/5/public/Stanford/Matlab/Preprocessing/ConvertC3D/getForcePlatformFromC3DParameters.m
+END
+processEMG.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/opensim-utils/!svn/ver/5/public/Stanford/Matlab/Preprocessing/ConvertC3D/processEMG.m
+END
+smooth.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/opensim-utils/!svn/ver/5/public/Stanford/Matlab/Preprocessing/ConvertC3D/smooth.m
+END
+deriv.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/opensim-utils/!svn/ver/6/public/Stanford/Matlab/Preprocessing/ConvertC3D/deriv.m
+END
+convert_FPtoLabCS.m
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/opensim-utils/!svn/ver/5/public/Stanford/Matlab/Preprocessing/ConvertC3D/convert_FPtoLabCS.m
+END
+computeCOPfromGRFM.m
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/opensim-utils/!svn/ver/5/public/Stanford/Matlab/Preprocessing/ConvertC3D/computeCOPfromGRFM.m
+END
+EXAMPLE_RUN_FILE.m
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/opensim-utils/!svn/ver/5/public/Stanford/Matlab/Preprocessing/ConvertC3D/EXAMPLE_RUN_FILE.m
+END
+write_motionFile.m
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/opensim-utils/!svn/ver/5/public/Stanford/Matlab/Preprocessing/ConvertC3D/write_motionFile.m
+END
+findIctoFromGRF.m
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/opensim-utils/!svn/ver/5/public/Stanford/Matlab/Preprocessing/ConvertC3D/findIctoFromGRF.m
+END
