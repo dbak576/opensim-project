@@ -22,7 +22,7 @@ for i = first:last
             err = RunTrial(model,strcat('Walk',num2str(j)),directory);
         end
         waitbar(j/10,loadingbar)
-        waitbar((((i-first)/((last-first)+1))+(j/100)),toploadingbar);
+        waitbar((((i-first)/((last-first)+1))+(j/((last-first)*10))),toploadingbar);
     end
     close(loadingbar)
 end

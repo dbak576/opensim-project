@@ -28,13 +28,17 @@ function err = convertC3DtoTRCandMOT(model, title, directory)
 % NOTE that the tInfo section below is specific to H20 series trials! May
 % be worth deleting and re-thinking.
 
-% -------------------------------------------------------------------
+% --------DEFINING tInfo FOR H2ns1 SET------------------------------------
 tInfo.vert_force_label = 'Fz';  % This identifies the vertical direction in the gait lab for the force plates
 tInfo.FP = [2, 1]; % This is the order the person hits the force plates (in some gait labs they can hit 3 before 2, etc.)
-tInfo.limb = {'L','R'}; %Which foot strikes each force plate (it doesn't have to be exact if it is not a good strike)
-tInfo.offsetInds = [1:12]; %The indices of the force plate data in the analog portion of the C3D file 
-tInfo.GRFinds = [1:12]; %Identifies the indices of the force plate data in the C3D file
+tInfo.offsetInds = 1:12; %The indices of the force plate data in the analog portion of the C3D file 
+tInfo.GRFinds = 1:12; %Identifies the indices of the force plate data in the C3D file
 tInfo.rotation = [0 1 0; 0 0 1; 1 0 0]; %90 degrees about y, then x (OpenSim custom)
+if strcmp(model,'H20s1')
+    tInfo.limb = {'L','R'}; % i.e. the left foot is on plate 1 (the SECOND plate)
+else
+    tInfo.limb = {'R','L'}; % i.e. the left foot is on plate 2 (the FIRST plate)
+end
 % -------------------------------------------------------------------
 
 warningMessage = false;
@@ -65,7 +69,7 @@ c3dFilename = fullfile(pwd,model,strcat(title,'.c3d'));
 
 % Use "readC3D.m" to read in the C3D data (largely unchanged from Seth's
 % original, review if needed, but pulls all data out quite effectively.)
-[Markers,MLabels,VideoFrameRate,AnalogSignals,ALabels, AUnits, AnalogFrameRate,Event,ParameterGroup,CameraInfo]... 
+[Markers,MLabels,VideoFrameRate,AnalogSignals,ALabels, AUnits, AnalogFrameRate,~,ParameterGroup,~]... 
     = readC3D(c3dFilename, [], offsetInds); % Note: 2nd argument if you want to limit the number of markers
 
 % number of markers
@@ -76,13 +80,13 @@ tInfo.Tstart = min(ParameterGroup(7).Parameter(7).data(2,1:4))-(ParameterGroup(1
 tInfo.Tend = max(ParameterGroup(7).Parameter(7).data(2,1:4))-(ParameterGroup(1).Parameter(1).data(1)*0.005);
 
 % video time
-[nvF, nc] = size(Markers);
-vFrms = [1:nvF]';
+[nvF, ~] = size(Markers);
+vFrms = (1:nvF)';
 vTime = 1/VideoFrameRate*(vFrms);
 
 % analog time
-[naF, nc] = size(AnalogSignals);
-aFrms = [1:naF]';
+[naF, ~] = size(AnalogSignals);
+aFrms = (1:naF)';
 aTime = 1/AnalogFrameRate*(aFrms);
 
 % trim data region of interest by time if indicated
@@ -94,11 +98,11 @@ if isfield(tInfo, 'Tstart')
     aInds = find(aTime >= t1 & aTime <= t2);
     % trim the Marker data 
     vFrms = vFrms(vInds);
-    nvF = length(vFrms);
+    %nvF = length(vFrms); THIS COULD BE IT
     vTime = vTime(vInds);
     Markers = Markers(vInds,:);
     % trim the Analog data 
-    aFrms = aFrms(aInds);
+    %aFrms = aFrms(aInds); THIS COULD BE IT
     aTime = aTime(aInds);
     AnalogSignals = AnalogSignals(aInds,:);
 end
@@ -106,21 +110,21 @@ end
 [missInds, missCols] = find(abs(Markers) < 1e-2);
 uniqueCols = unique(missCols);
 missMarks = ~mod(uniqueCols,3).*uniqueCols/3;
-missMarks = missMarks(find(missMarks));
+missMarks = missMarks(find(missMarks)); %#ok<FNDSB>
 allInds = 1:size(Markers);
 garbage = [];
 badMarkerIndex = 1;
 badMarkerNames = {'FAKE'};
 if any(missMarks),
     for I = missMarks'
-        gapInds = missInds(find(missCols == 3*I));
+        gapInds = missInds(find(missCols == 3*I)); %#ok<FNDSB>
         mstring = MLabels(I);
         if  length(gapInds) > 10
             if warningMessage == true
             message = sprintf('Marker %s has more than 10 frames missing.', mstring{1}); 
-            warning(message);
+            warning(message); %#ok<SPWRN>
             end
-            garbage = [garbage I];
+            garbage = [garbage I]; %#ok<AGROW>
             badMarkerNames(badMarkerIndex) = mstring(1);
             badMarkerIndex = badMarkerIndex + 1;
         else
@@ -141,7 +145,7 @@ if any(garbage),
     MLabels = MLabels(good);
     goodCols = [];
     for I = 1:length(good),
-        goodCols = [goodCols, 3*good(I)-2:3*good(I)];
+        goodCols = [goodCols, 3*good(I)-2:3*good(I)]; %#ok<AGROW>
     end
     Markers = Markers(:,goodCols);
 end
@@ -166,9 +170,9 @@ err = writeMarkersToTRC(trcFilename, Markers, MLabels, VideoFrameRate, vFrms, vT
 % find the Analog Signals correspondint to vertical ground reaction forces
 vert_f_block = (ismember(char(ALabels), tInfo.vert_force_label));
 % has to match vert_force_label characters
-vert_f_inds = find(sum(vert_f_block,2)>1);
+vert_f_inds = find(sum(vert_f_block,2)>1); %#ok<NASGU>
 
-vert_forces = AnalogSignals(:,vert_f_inds);
+%vert_forces = AnalogSignals(:,vert_f_inds);
 % if max(max(abs(vert_forces))) > max(max(vert_forces)), % force has negative peaks
 %     vert_forces = -vert_forces;
 %     AnalogSignals(:,vert_f_inds) = vert_forces;
@@ -176,21 +180,20 @@ vert_forces = AnalogSignals(:,vert_f_inds);
 
 
 % Check if any of the units are in terms of mm
-mmBlock = ismember(strvcat(AUnits), 'mm');
+mmBlock = ismember(strvcat(AUnits), 'mm'); %#ok<DSTRVCT>
 % get column indices 
 mmInds = find(sum(mmBlock,2)>1);
 
 if mmInds,
     % HACK to get a rid of junk '3M' units in some moment data
-    mmInds = [mmInds; strmatch('3M', AUnits)];
+    mmInds = [mmInds; strmatch('3M', AUnits)]; %#ok<MATCH2>
 end
 
 % change all mm units to meters in one shot
 AnalogSignals(:,mmInds) = 0.001 * AnalogSignals(:,mmInds);
 
 % Detect gait events from the vertical GRF
-[icFromGRF, toFromGRF] = findIctoFromGRF(abs(vert_forces), 0.01);
-  
+%[icFromGRF, toFromGRF] = findIctoFromGRF(abs(vert_forces), 0.01);
 % Write motion file with ground reaction forces and center of pressure
 % First get the necessary force-plate (fp) information
 f = getForcePlatformFromC3DParameters(ParameterGroup);
@@ -218,27 +221,27 @@ actionGRFTz_lab = convert_FPtoLabCS(actionGRFTz_FP, f);
 % GRFTz_byLimb = get_GRFTzByLimb(reactionGRFTz_lab, tInfo)
 
 GRFTz_byLimb = get_GRFTzByLimb(actionGRFTz_lab, tInfo);
-% CutOffFrequency = 6;
-% GRFTz_byLimb = clean_grfs(GRFTz_byLimb, AnalogFrameRate, CutOffFrequency, tInfo, aTime, vTime);
+CutOffFrequency = 50;
+GRFTz_byLimb = clean_grfs(GRFTz_byLimb, AnalogFrameRate, CutOffFrequency, tInfo, aTime, vTime);
 
 % Plot the GRFTz data for each limb, and interactively eliminate
 % discontinuities in the COP trajectories.
 % COP_smoothed = smoothCOP(GRFTz_byLimb, naF, AnalogFrameRate, 0, tInfo)
 motFilename = strcat(title,'.mot');
-writeGRFsToMOT(GRFTz_byLimb, aTime(1), AnalogFrameRate, motFilename, isFZ);
+writeGRFsToMOT(GRFTz_byLimb, vTime(1), VideoFrameRate, motFilename, isFZ);
 
 %% EMG Data
 
 % Assume everything that is EMG data has the emgPrefix
 % Check if any of the ALabels contain the emgPrefix
-emgBlock = ismember(strvcat(ALabels), emgPrefix);
+emgBlock = ismember(strvcat(ALabels), emgPrefix); %#ok<DSTRVCT>
 % get column indices 
 emgInds = find(sum(emgBlock,2)>1);
 
 rawEMG = AnalogSignals(:,emgInds);
 
 % process the EMG data
-[proEMG, rectEMG] = processEMG(rawEMG, AnalogFrameRate);
+[proEMG, ~] = processEMG(rawEMG, AnalogFrameRate);
 
 % for a structure for writing to file
 emg.data = [aTime, proEMG];
@@ -253,11 +256,11 @@ exLoadsFilename = 'ExternalLoads.xml';
 IKfilename = 'IKSetup.xml';
 IDfilename = 'IDSetup.xml';
 timerange = [tInfo.Tstart tInfo.Tend];
-IKerr = changeIKXMLFile(IKfilename,title,timerange,model,directory,MLabels,badMarkerNames);
+IKerr = changeIKXMLFile(IKfilename,title,timerange,model,directory,MLabels,badMarkerNames); %#ok<NASGU>
 xmlShorten(strcat(title,IKfilename));
-err2 = changeIDXMLFile(IDfilename,title,timerange,model,directory,6);
+IDerr = changeIDXMLFile(IDfilename,title,timerange,model,directory,6); %#ok<NASGU>
 xmlShorten(strcat(title,IDfilename));
-err3 = changeLoadXMLFile(exLoadsFilename,title,model,directory);
+ExLerr = changeLoadXMLFile(exLoadsFilename,title,model,directory); %#ok<NASGU>
 xmlShorten(strcat(title,exLoadsFilename));
 
 %% Move all files
@@ -282,6 +285,6 @@ copyfile(osimFilename, newFolder)
 %% Cut Markers
 if warningMessage == true
 message = sprintf('The following markers have more than 10 frames missing, might wanna give a bit of a review.'); 
-warning(message);
+warning(message); %#ok<SPWRN>
 disp(badMarkerNames);
 end

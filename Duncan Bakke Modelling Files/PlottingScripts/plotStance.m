@@ -5,6 +5,9 @@ function [resultantData, headerLine, ParameterGroup, leftTrajectory, rightTrajec
 % Get data, headers, and times for interpolation
 interpolationPointNumber = 101;
 heelStrikeTimes = zeros(number,2,2);
+if length(forPlotting) < 6;
+   forPlotting = {'hip_flexion','hip_adduction','hip_rotation','knee_angle','ankle_angle','subtalar_angle'}; 
+end
 for i = 1:number
     c3dFilename = strcat(directory,'\',model,'\',title,num2str(i),'\',title,num2str(i),'.c3d');
     dataFilename = strcat(directory,'\',model,'\',title,num2str(i),'\',title,num2str(i),filename);
@@ -13,6 +16,8 @@ for i = 1:number
     heelStrikeTimes(i,2,1:2) = ParameterGroup(7).Parameter(7).data(2,3:4)-(ParameterGroup(1).Parameter(1).data(1)*0.005);
     % NOTE THAT heelStrikeTimes (:,1,:) is the SECOND STEP in the
     % H20sets, and vice versa.
+    disp(model)
+    disp(i)
     [resultantData{i}, headerLine(i,:)] = RetrieveMOTData(dataFilename);
     % THIS should be reviewed if wrong entries are coming through
     leftStrikeStart = (heelStrikeTimes(i,1,1)-resultantData{i}(1,1))/0.005 + 1;
@@ -64,9 +69,6 @@ end
 for i = 1:number
     leftInterpolated{i}(:,1) = linspace(leftTrajectories{i}(1,1),leftTrajectories{i}(end,1),interpolationPointNumber);
     rightInterpolated{i}(:,1) = linspace(rightTrajectories{i}(1,1),rightTrajectories{i}(end,1),interpolationPointNumber);
-    if rightInterpolated{i}(1,1) == rightInterpolated{i}(2,1)
-        disp(rightInterpolated{i}(1,1));
-    end
     for j = 1:length(forPlotting)
         leftInterpolated{i}(:,j+1) = interp1(leftTrajectories{i}(:,1),leftTrajectories{i}(:,(1+j)),leftInterpolated{i}(:,1));
         rightInterpolated{i}(:,j+1) = interp1(rightTrajectories{i}(:,1),rightTrajectories{i}(:,(1+j)),rightInterpolated{i}(:,1));

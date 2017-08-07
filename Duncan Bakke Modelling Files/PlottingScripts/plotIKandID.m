@@ -11,6 +11,5 @@ IDfilename = 'IDResults.sto';
 
 plot_stance_kinematics(IKleftTrajectory,IKrightTrajectory,IKleftStDev,IKrightStDev, forPlotting, model);
 plot_stance_kinetics(IDleftTrajectory,IDrightTrajectory,IDleftStDev,IDrightStDev, forPlotting, model);
-
 err = 0;
 end
