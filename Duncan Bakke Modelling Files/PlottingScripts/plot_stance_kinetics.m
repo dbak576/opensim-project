@@ -5,6 +5,7 @@ err = 0;
 plot_R = 'y';
 plot_L = 'y';
 subject_name = name;
+
 hipFlexionIndex = find(ismember(forPlotting,'hip_flexion'))+1;
 hipAdductionIndex = find(ismember(forPlotting,'hip_adduction'))+1;
 hipRotationIndex = find(ismember(forPlotting,'hip_rotation'))+1;

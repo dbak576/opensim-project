@@ -221,7 +221,7 @@ actionGRFTz_lab = convert_FPtoLabCS(actionGRFTz_FP, f);
 % GRFTz_byLimb = get_GRFTzByLimb(reactionGRFTz_lab, tInfo)
 
 GRFTz_byLimb = get_GRFTzByLimb(actionGRFTz_lab, tInfo);
-CutOffFrequency = 50;
+CutOffFrequency = 10;
 GRFTz_byLimb = clean_grfs(GRFTz_byLimb, AnalogFrameRate, CutOffFrequency, tInfo, aTime, vTime);
 
 % Plot the GRFTz data for each limb, and interactively eliminate

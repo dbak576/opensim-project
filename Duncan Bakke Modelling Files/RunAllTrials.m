@@ -1,11 +1,11 @@
 function err = RunAllTrials(first,last,directory)
 % RunAllTrials: Runs all specified H20s1-H30s1 trials
 %   Detailed explanation goes here
-tic
 toploadingbar = waitbar(0,'Running all Trials');
 toploadingbar.Name = 'Running All Trials';
 movegui(toploadingbar,'north');
-for i = first:last
+i = first;
+while (i<=last)
     model = strcat('H',num2str(i),'s1');
     loadingbar = waitbar(0,strcat('Processing Trials for Subject ', model));
     loadingbar.Name = 'Running Trials';
@@ -21,12 +21,14 @@ for i = first:last
         else
             err = RunTrial(model,strcat('Walk',num2str(j)),directory);
         end
-        waitbar(j/10,loadingbar)
-        waitbar((((i-first)/((last-first)+1))+(j/((last-first)*10))),toploadingbar);
+        jprog = j/10;
+        waitbar(jprog,loadingbar)
+        numMods = (first-last)+1;
+        waitbar((((i-first)+1)/numMods)+jprog/numMods,toploadingbar);
     end
     close(loadingbar)
+    i = i + 1;
 end
 close(toploadingbar)
-toc
 end
 
