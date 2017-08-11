@@ -13,6 +13,7 @@ for j = 1:10
             curFile = fullFile('HJCLoopOutput',strcat('Output',coordString),model,trial);
             copyfile(fullfile(pwd,'Output',model,trial,strcat(trial,'IKResults.mot')), curFile);
             copyfile(fullfile(pwd,'Output',model,trial,strcat(trial,'IDResults.sto')), curFile);
+            copyfile(fullfile(pwd,'Output',model,trial,strcat(trial,'.c3d')), curFile);
             %TO DO: Copy over muscle force data
         end
     elseif modelNum == 26
@@ -22,6 +23,7 @@ for j = 1:10
             curFile = fullFile('HJCLoopOutput',strcat('Output',coordString),model,trial);
             copyfile(fullfile(pwd,'Output',model,trial,strcat(trial,'IKResults.mot')), curFile);
             copyfile(fullfile(pwd,'Output',model,trial,strcat(trial,'IDResults.sto')), curFile);
+            copyfile(fullfile(pwd,'Output',model,trial,strcat(trial,'.c3d')), curFile);
             %TO DO: Copy over muscle force data
         end
     else
@@ -30,6 +32,7 @@ for j = 1:10
         curFile = fullfile('HJCLoopOutput',strcat('Output',coordString),model,trial);
         copyfile(fullfile(pwd,'Output',model,trial,strcat(trial,'IKResults.mot')), curFile);
         copyfile(fullfile(pwd,'Output',model,trial,strcat(trial,'IDResults.sto')), curFile);
+        copyfile(fullfile(pwd,'Output',model,trial,strcat(trial,'.c3d')), curFile);
         %TO DO: Copy over muscle force data
     end
 end
