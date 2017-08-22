@@ -15,8 +15,9 @@ originalCoords = findHJC(model,side);
 xRange = linspace((originalCoords(1)-(boundWidth/2)),(originalCoords(1)+(boundWidth/2)),boundRes);
 yRange = linspace((originalCoords(2)-(boundWidth/2)),(originalCoords(2)+(boundWidth/2)),boundRes);
 zRange = linspace((originalCoords(3)-(boundWidth/2)),(originalCoords(3)+(boundWidth/2)),boundRes);
+numPoints = boundRes^3;
 loadingbar = waitbar(0,'HJC Loop');
-loadingbar.Name = 'HJCloop';
+loadingbar.Name = sprintf('HJC Loop: %i Locations',numPoints);
 movegui(loadingbar,'southeast');
 percentage = 0;
 tic
@@ -26,6 +27,7 @@ for x = xRange
         for z = zRange
             percentage = percentage + (1/(boundRes^3));
             waitbar(percentage,loadingbar)
+            set( get(findobj(loadingbar,'type','axes'),'title'), 'string', sprintf('HJC Loop: Analysing HJC %i of %i',(percentage*numPoints),numPoints));
             newCoords = [x,y,z];
             setHJC(model,side,newCoords);
             runerr = RunAllTrials(modelNum,modelNum,directory); %#ok<NASGU>

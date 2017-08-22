@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CMCTool name="hpl_overground_slow_walk_cmc_SLS">
+	<!--Name of the model library to load. Do not include the library
+	    extension (e.g., .dll or .lib).-->
+	<!--<model_library> gait23 </model_library>-->
+	<!--Name of the .osim file used to construct a model.-->
+	<model_file> RRA_adjusted_modellight.osim </model_file>
+	<!--Replace the model's actuator set with sets specified in
+	    <actuator_set_files>? If false, the actuator set is appended to.-->
+	<replace_actuator_set> false </replace_actuator_set>
+	<!--List of xml files used to construct an actuator set for the model.-->
+	<actuator_set_files> hpl_overground_CMC_Actuators.xml </actuator_set_files>
+	<!--Directory used for writing results.-->
+	<results_directory> ResultsCMClight2 </results_directory>
+	<!--Output precision.  It is 20 by default.-->
+	<output_precision> 20 </output_precision>
+	<!--Initial time for the simulation.-->
+	<initial_time>       0.40999999999999998000 </initial_time>
+	<!--Final time for the simulation.-->
+	<final_time>       1.39999999999999990000 </final_time>
+	<!--final_time>2.75 </final_time-->
+	<!--Maximum number of integrator steps.-->
+	<maximum_number_of_integrator_steps> 30000 </maximum_number_of_integrator_steps>
+	<!--Maximum integration step size.-->
+	<maximum_integrator_step_size>       0.00025000000000000001 </maximum_integrator_step_size>
+	<!--Integrator error tolerance. When the error is greater, the integrator
+	    step size is decreased.-->
+	<integrator_error_tolerance>       0.00000500000000000000 </integrator_error_tolerance>
+	<!--Integrator fine tolerance. When the error is less, the integrator step
+	    size is increased.-->
+	<integrator_fine_tolerance>       0.00000005000000000000 </integrator_fine_tolerance>
+	<!--Set of analyses to be run during the investigation.-->
+	<AnalysisSet name="Analyses">
+		<objects>
+			<Kinematics name="Kinematics">
+				<!--Flag (true or false) specifying whether whether on. True by default.-->
+				<on> true </on>
+				<!--Specifies how often to store results during a simulation. More
+				    specifically, the interval (a positive integer) specifies how many
+				    successful integration steps should be taken before results are
+				    recorded again.-->
+				<step_interval> 10 </step_interval>
+				<!--Flag (true or false) indicating whether the results are in degrees or
+				    not.-->
+				<in_degrees> true </in_degrees>
+				<!--Start time.-->
+				<start_time> -1000000000000000000000000000000.00000000000000000000 </start_time>
+				<!--End time.-->
+				<end_time> 1000000000000000000000000000000.00000000000000000000 </end_time>
+				<!--Names of generalized coordinates to record kinematics for.  Use 'all'
+				    to record all coordinates.-->
+				<coordinates> all </coordinates>
+			</Kinematics>
+			<Actuation name="Actuation">
+				<!--Flag (true or false) specifying whether whether on. True by default.-->
+				<on> true </on>
+				<!--Specifies how often to store results during a simulation. More
+				    specifically, the interval (a positive integer) specifies how many
+				    successful integration steps should be taken before results are
+				    recorded again.-->
+				<step_interval> 10 </step_interval>
+				<!--Flag (true or false) indicating whether the results are in degrees or
+				    not.-->
+				<in_degrees> true </in_degrees>
+				<!--Start time.-->
+				<start_time> -1000000000000000000000000000000.00000000000000000000 </start_time>
+				<!--End time.-->
+				<end_time> 1000000000000000000000000000000.00000000000000000000 </end_time>
+			</Actuation>
+		</objects>
+		<groups/>
+	</AnalysisSet>
+
+	<!--Motion (.mot) or storage (.sto) file containing the desired kinematic
+	    trajectories.-->
+	<desired_kinematics_file> ResultsRRAlight/hpl_overground_slow_walk_RRA_Kinematics_q.mot </desired_kinematics_file>
+	<!--Low-pass cut-off frequency for filtering the desired kinematics. A
+	    negative value results in no filtering. The default value is -1.0, so
+	    no filtering.-->
+	<lowpass_cutoff_frequency>     -10.00000000000000000000 </lowpass_cutoff_frequency>
+	<!--File containing the tracking tasks. Which coordinates are tracked and
+	    with what weights are specified here.-->
+	<task_set_file> hpl_overground_CMC_Tasks.xml </task_set_file>
+	<!--File containing the constraints on the controls.-->
+	<constraints_file> hpl_overground_CMC_ControlConstraints.xml </constraints_file>
+
+	<!--Motion file (.mot) or storage file (.sto) containing the external
+	    loads applied to the model.-->
+	<external_loads_file> walk2_grf.mot </external_loads_file>
+	<!--Motion file (.mot) or storage file (.sto) containing the model
+	    kinematics corresponding to the external loads.-->
+	<external_loads_model_kinematics_file> IKwalk2lightgrf.mot </external_loads_model_kinematics_file>
+	<!--Name of the body to which the first set of external loads should be
+	    applied (e.g., the name of the right foot).-->
+	<external_loads_body1> calcn_r </external_loads_body1>
+	<!--Name of the body to which the second set of external loads should be
+	    applied (e.g., the name of the left foot).-->
+	<external_loads_body2> calcn_l </external_loads_body2>
+	<!--Low-pass cut-off frequency for filtering the model kinematics
+	    corresponding to the external loads. A negative value results in no
+	    filtering. The default value is -1.0, so no filtering.-->
+	<lowpass_cutoff_frequency_for_load_kinematics>       6.00000000000000000000 </lowpass_cutoff_frequency_for_load_kinematics>
+
+	<!--Flag (true or false) indicating whether to use the fast CMC
+	    optimization target. The fast target requires the desired
+	    accelerations to be met. The optimizer fails if the acclerations
+	    constraints cannot be met, so the fast target can be less robust.  The
+	    regular target does not require the acceleration constraints to be
+	    met; it meets them as well as it can, but it is slower and less
+	    accurate.-->
+	<use_fast_optimization_target> true </use_fast_optimization_target>
+	<!--Perturbation size used by the optimizer to compute numerical
+	    derivatives. A value between 1.0e-4 and 1.0e-8 is usually
+	    approprieate.-->
+	<optimizer_derivative_dx>       1.00000000000000000000 </optimizer_derivative_dx>
+	<!--Convergence criterion for the optimizer. The smaller this value, the
+	    deeper the convergence. Decreasing this number can improve a solution,
+	    but will also likely increase computation time.-->
+	<optimizer_convergence_criterion>       0.10000000000000001000 </optimizer_convergence_criterion>
+	<!--Maximum number of iterations for the optimizer.-->
+	<optimizer_max_iterations> 2000 </optimizer_max_iterations>
+	<!--Print level for the optimizer, 0 - 3. 0=no printing, 3=detailed
+	    printing, 2=in between-->
+	<optimizer_print_level> 0 </optimizer_print_level>
+	<!--Preferred optimizer algorithm (currently support "ipopt" or "cfsqp",
+	    the latter requiring the osimFSQP library.-->
+	<optimizer_algorithm> ipopt </optimizer_algorithm>
+
+	<!--Time window over which the desired actuator forces are achieved.
+	    Muscles forces cannot change instantaneously, so a finite time window
+	    must be allowed. The recommended time window for RRA is about 0.001
+	    sec, and for CMC is about 0.010 sec.-->
+	<cmc_time_window>       0.00900000000000000000 </cmc_time_window>
+	<!--Flag (true or false) indicating whether or not to use the curvature
+	    filter. Setting this flag to true can reduce oscillations in the
+	    computed muscle excitations.-->
+	<use_curvature_filter> true </use_curvature_filter>
+	<!--Flag (true or false) indicating whether or not to compute average
+	    residuals. No actions are taken based on this flag other than printing
+	    the average residuals, which can be useful for seeing if the solution
+	    is good.  Average residuals should be be close to 0.0.  If not, there
+	    is likely problem in the experimental data, in the model, or both.-->
+	<compute_average_residuals> true </compute_average_residuals>
+	<!--Flag (true or false) indicating whether or not to make an adjustment
+	    in the center of mass of a body to reduced DC offsets in MX and MZ. If
+	    true, a new model is writen out that has altered anthropometry.-->
+	<adjust_com_to_reduce_residuals> false </adjust_com_to_reduce_residuals>
+	
+	<defaults>
+		<Force name="default">
+			<body_A>  </body_A>
+			<point_A>       0.00000000000000000000       0.00000000000000000000       0.00000000000000000000 </point_A>
+			<direction_A>       1.00000000000000000000       0.00000000000000000000       0.00000000000000000000 </direction_A>
+			<body_B>  </body_B>
+			<point_B>       0.00000000000000000000       0.00000000000000000000       0.00000000000000000000 </point_B>
+			<optimal_force>    1000.00000000000000000000 </optimal_force>
+		</Force>
+		<GeneralizedForce name="default">
+			<coordinate> Unassigned </coordinate>
+			<optimal_force>     300.00000000000000000000 </optimal_force>
+		</GeneralizedForce>
+		<ControlLinear name="default">
+			<is_model_control> true </is_model_control>
+			<extrapolate> true </extrapolate>
+			<default_min>      -1.00000000000000000000 </default_min>
+			<default_max>       1.00000000000000000000 </default_max>
+			<filter_on> false </filter_on>
+			<use_steps> false </use_steps>
+			<x_nodes/>
+			<min_nodes/>
+			<max_nodes/>
+			<kp>     100.00000000000000000000 </kp>
+			<kv>      20.00000000000000000000 </kv>
+		</ControlLinear>
+		<Thelen2003Muscle name="default">
+			<MusclePointSet name="">
+				<objects/>
+				<groups/>
+			</MusclePointSet>
+			<VisibleObject name="">
+				<geometry_files> </geometry_files>
+				<VisibleProperties name="">
+					<display_preference> 4 </display_preference>
+					<show_normals> false </show_normals>
+					<show_axes> false </show_axes>
+					<material_name> DEFAULT </material_name>
+				</VisibleProperties>
+				<scale_factors>       1.00000000000000000000       1.00000000000000000000       1.00000000000000000000 </scale_factors>
+			</VisibleObject>
+			<MuscleWrapSet name="">
+				<objects/>
+				<groups/>
+			</MuscleWrapSet>
+			<muscle_model> 9 </muscle_model>
+			<max_isometric_force>       0.00000000000000000000 </max_isometric_force>
+			<optimal_fiber_length>       0.00000000000000000000 </optimal_fiber_length>
+			<tendon_slack_length>       0.00000000000000000000 </tendon_slack_length>
+			<pennation_angle>       0.00000000000000000000 </pennation_angle>
+			<activation_time_constant>       0.01000000000000000000 </activation_time_constant>
+			<deactivation_time_constant>       0.04000000000000000100 </deactivation_time_constant>
+			<Vmax>      10.00000000000000000000 </Vmax>
+			<Vmax0>       5.00000000000000000000 </Vmax0>
+			<FmaxTendonStrain>       0.03300000000000000200 </FmaxTendonStrain>
+			<FmaxMuscleStrain>       0.59999999999999998000 </FmaxMuscleStrain>
+			<KshapeActive>       0.40000000000000002000 </KshapeActive>
+			<KshapePassive>       4.00000000000000000000 </KshapePassive>
+			<damping>       0.01000000000000000000 </damping>
+			<Af>       0.29999999999999999000 </Af>
+			<Flen>       1.80000000000000000000 </Flen>
+		</Thelen2003Muscle>
+		<Schutte1993Muscle name="default">
+			<MusclePointSet name="">
+				<objects/>
+				<groups/>
+			</MusclePointSet>
+			<VisibleObject name="">
+				<geometry_files> </geometry_files>
+				<VisibleProperties name="">
+					<display_preference> 4 </display_preference>
+					<show_normals> false </show_normals>
+					<show_axes> false </show_axes>
+					<material_name> DEFAULT </material_name>
+				</VisibleProperties>
+				<scale_factors>       1.00000000000000000000       1.00000000000000000000       1.00000000000000000000 </scale_factors>
+			</VisibleObject>
+			<MuscleWrapSet name="">
+				<objects/>
+				<groups/>
+			</MuscleWrapSet>
+			<muscle_model> 9 </muscle_model>
+			<time_scale>       0.10000000000000001000 </time_scale>
+			<activation1>       0.00000000000000000000 </activation1>
+			<activation2>       0.00000000000000000000 </activation2>
+			<max_isometric_force>       0.00000000000000000000 </max_isometric_force>
+			<optimal_fiber_length>       0.00000000000000000000 </optimal_fiber_length>
+			<tendon_slack_length>       0.00000000000000000000 </tendon_slack_length>
+			<pennation_angle>       0.00000000000000000000 </pennation_angle>
+			<max_contraction_velocity>      10.00000000000000000000 </max_contraction_velocity>
+			<damping>       0.01000000000000000000 </damping>
+			<tendon_force_length_curve>
+				<natCubicSpline name="">
+					<min_x>       0.00000000000000000000 </min_x>
+					<max_x>       0.00000000000000000000 </max_x>
+					<min_y>       0.00000000000000000000 </min_y>
+					<max_y>       0.00000000000000000000 </max_y>
+					<min_z>       0.00000000000000000000 </min_z>
+					<max_z>       0.00000000000000000000 </max_z>
+					<x>     -10.00000000000000000000      -0.00200000000000000000      -0.00100000000000000000       0.00000000000000000000       0.00131000000000000000       0.00281000000000000000       0.00430999999999999960       0.00581000000000000010       0.00730999999999999970       0.00881000000000000010       0.01030000000000000000       0.01180000000000000000       0.01230000000000000000       9.19999999999999930000       9.20100000000000050000       9.20200000000000000000      20.00000000000000000000 </x>
+					<y>       0.00000000000000000000       0.00000000000000000000       0.00000000000000000000       0.00000000000000000000       0.01080000000000000100       0.02570000000000000100       0.04349999999999999700       0.06519999999999999400       0.09149999999999999800       0.12300000000000000000       0.16100000000000000000       0.20799999999999999000       0.22700000000000001000     345.00000000000000000000     345.00000000000000000000     345.00000000000000000000     345.00000000000000000000 </y>
+				</natCubicSpline>
+			</tendon_force_length_curve>
+			<active_force_length_curve>
+				<natCubicSpline name="">
+					<min_x>       0.00000000000000000000 </min_x>
+					<max_x>       0.00000000000000000000 </max_x>
+					<min_y>       0.00000000000000000000 </min_y>
+					<max_y>       0.00000000000000000000 </max_y>
+					<min_z>       0.00000000000000000000 </min_z>
+					<max_z>       0.00000000000000000000 </max_z>
+					<x>      -5.30769200000000030000      -4.30769200000000030000      -1.92307699999999990000      -0.88461500000000004000      -0.26923100000000000000       0.23076900000000000000       0.46153800000000000000       0.52725000000000000000       0.62875000000000003000       0.71875000000000000000       0.86124999999999996000       1.04499999999999990000       1.21750000000000000000       1.43875000000000000000       1.50000000000000000000       1.61538500000000010000       2.00000000000000000000       2.96153800000000000000       3.69230800000000010000       5.46153800000000000000       9.90190199999999980000 </x>
+					<y>       0.01218799999999999900       0.02189899999999999800       0.03646599999999999800       0.05249299999999999800       0.07531200000000000400       0.11415800000000000000       0.15785900000000000000       0.22666700000000001000       0.63666699999999998000       0.85666699999999996000       0.94999999999999996000       0.99333300000000002000       0.77000000000000002000       0.24666700000000000000       0.19382099999999999000       0.13325200000000001000       0.07268299999999999800       0.04441699999999999800       0.03634099999999999800       0.02189899999999999800       0.00733200000000000000 </y>
+				</natCubicSpline>
+			</active_force_length_curve>
+			<passive_force_length_curve>
+				<natCubicSpline name="">
+					<min_x>       0.00000000000000000000 </min_x>
+					<max_x>       0.00000000000000000000 </max_x>
+					<min_y>       0.00000000000000000000 </min_y>
+					<max_y>       0.00000000000000000000 </max_y>
+					<min_z>       0.00000000000000000000 </min_z>
+					<max_z>       0.00000000000000000000 </max_z>
+					<x>      -5.00000000000000000000       0.99800000000000000000       0.99900000000000000000       1.00000000000000000000       1.10000000000000010000       1.20000000000000000000       1.30000000000000000000       1.39999999999999990000       1.50000000000000000000       1.60000000000000010000       1.60100000000000000000       1.60200000000000010000       5.00000000000000000000 </x>
+					<y>       0.00000000000000000000       0.00000000000000000000       0.00000000000000000000       0.00000000000000000000       0.03500000000000000300       0.12000000000000000000       0.26000000000000001000       0.55000000000000004000       1.16999999999999990000       2.00000000000000000000       2.00000000000000000000       2.00000000000000000000       2.00000000000000000000 </y>
+				</natCubicSpline>
+			</passive_force_length_curve>
+			<force_velocity_curve>
+				<natCubicSpline name="">
+					<min_x>       0.00000000000000000000 </min_x>
+					<max_x>       0.00000000000000000000 </max_x>
+					<min_y>       0.00000000000000000000 </min_y>
+					<max_y>       0.00000000000000000000 </max_y>
+					<min_z>       0.00000000000000000000 </min_z>
+					<max_z>       0.00000000000000000000 </max_z>
+					<x>      -1.00000000000000000000      -0.94999999999999996000      -0.90000000000000002000      -0.84999999999999998000      -0.80000000000000004000      -0.75000000000000000000      -0.69999999999999996000      -0.65000000000000002000      -0.59999999999999998000      -0.55000000000000004000      -0.50000000000000000000      -0.45000000000000001000      -0.40000000000000002000      -0.34999999999999998000      -0.29999999999999999000      -0.25000000000000000000      -0.20000000000000001000      -0.14999999999999999000      -0.10000000000000001000      -0.05000000000000000300       0.00000000000000000000       0.05000000000000000300       0.10000000000000001000       0.14999999999999999000       0.20000000000000001000       0.25000000000000000000       0.29999999999999999000       0.34999999999999998000       0.40000000000000002000       0.45000000000000001000       0.50000000000000000000       0.55000000000000004000       0.59999999999999998000       0.65000000000000002000       0.69999999999999996000       0.75000000000000000000       0.80000000000000004000       0.84999999999999998000       0.90000000000000002000       0.94999999999999996000       1.00000000000000000000 </x>
+					<y>       0.00000000000000000000       0.01041699999999999900       0.02173900000000000100       0.03409100000000000300       0.04761900000000000200       0.06250000000000000000       0.07894700000000000300       0.09722200000000000300       0.11764700000000000000       0.14062500000000000000       0.16666700000000001000       0.19642899999999999000       0.23076900000000000000       0.27083299999999999000       0.31818200000000002000       0.37500000000000000000       0.44444400000000001000       0.53125000000000000000       0.64285700000000001000       0.79166700000000001000       1.00000000000000000000       1.48201399999999990000       1.60157100000000010000       1.65579100000000000000       1.68673900000000000000       1.70675099999999990000       1.72075300000000000000       1.73109899999999990000       1.73905500000000000000       1.74536500000000010000       1.75049000000000010000       1.75473600000000010000       1.75831200000000010000       1.76136399999999990000       1.76399900000000010000       1.76629799999999990000       1.76832100000000000000       1.77011500000000010000       1.77171700000000000000       1.77315500000000000000       1.77445499999999990000 </y>
+				</natCubicSpline>
+			</force_velocity_curve>
+		</Schutte1993Muscle>
+		<Torque name="default">
+			<body_A> Unassigned </body_A>
+			<direction_A>       1.00000000000000000000       0.00000000000000000000       0.00000000000000000000 </direction_A>
+			<body_B> Unassigned </body_B>
+			<optimal_force>       1.00000000000000000000 </optimal_force>
+		</Torque>
+		<rdCMC_Joint name="default">
+			<!--Flag (true or false) indicating whether or not a task is on.-->
+			<on> false </on>
+			<!--Body frame with respect to which a tracking objective is specified.
+			    This property is not used for tracking joint angles.-->
+			<wrt_body> -1 </wrt_body>
+			<!--Specifies the body frame in which the tracking objectives are
+			    expressed.  This property is not used for tracking joint angles.-->
+			<express_body> -1 </express_body>
+			<!--Array of 3 flags (each true or false) specifying whether a component
+			    of a task is active.  For example, tracking the trajectory of a point
+			    in space could have three components (x,y,z).  This allows each of
+			    those to be made active (true) or inactive (false).  A task for
+			    tracking a joint coordinate only has one component.-->
+			<active> false false false </active>
+			<!--Weight with which a task is tracked relative to other tasks. To track
+			    a task more tightly, make the weight larger.-->
+			<weight>       1.00000000000000000000       1.00000000000000000000       1.00000000000000000000 </weight>
+			<!--Position error feedback gain (stiffness). To achieve critical damping
+			    of errors, choose kv = 2*sqrt(kp).-->
+			<kp>       1.00000000000000000000       1.00000000000000000000       1.00000000000000000000 </kp>
+			<!--Velocity error feedback gain (damping). To achieve critical damping of
+			    errors, choose kv = 2*sqrt(kp).-->
+			<kv>       1.00000000000000000000       1.00000000000000000000       1.00000000000000000000 </kv>
+			<!--Feedforward acceleration gain.  This is normally set to 1.0, so no
+			    gain.-->
+			<ka>       1.00000000000000000000       1.00000000000000000000       1.00000000000000000000 </ka>
+			<!--Direction vector[3] for component 0 of a task. Joint tasks do not use
+			    this propery.-->
+			<r0>       0.00000000000000000000       0.00000000000000000000       0.00000000000000000000 </r0>
+			<!--Direction vector[3] for component 1 of a task. Joint tasks do not use
+			    this property.-->
+			<r1>       0.00000000000000000000       0.00000000000000000000       0.00000000000000000000 </r1>
+			<!--Direction vector[3] for component 2 of a task. Joint tasks do not use
+			    this property.-->
+			<r2>       0.00000000000000000000       0.00000000000000000000       0.00000000000000000000 </r2>
+			<!--Name of the coordinate to be tracked.-->
+			<coordinate>  </coordinate>
+			<!--Error limit on the tracking accuracy for this coordinate. If the
+			    tracking errors approach this limit, the weighting for this coordinate
+			    is increased.-->
+			<limit>       0.00000000000000000000 </limit>
+		</rdCMC_Joint>
+	</defaults>
+	<!--Replace the model's contact force set with sets specified in
+	    <contact_force_set_files>? If false, contact force set is appended to.-->
+	<replace_contact_force_set> true </replace_contact_force_set>
+	<!--List of xml files used to construct a contact set for the model.-->
+	<contact_force_set_files> </contact_force_set_files>
+	<!--Flag indicating whether or not to compute equilibrium values for
+	    states other than the coordinates or speeds.  For example, equilibrium
+	    muscle fiber lengths or muscle forces.-->
+	<solve_for_equilibrium_for_auxiliary_states> false </solve_for_equilibrium_for_auxiliary_states>
+	<!--File containing the controls output by RRA. These can be used to place
+	    constraints on the residuals during CMC.-->
+	<rra_controls_file>  </rra_controls_file>
+	<!--Flag (true or false) indicating whether or not to use reflexes.  This
+	    is a hook for users wanting to modify controls based on additonal
+	    information.-->
+	<use_reflexes> false </use_reflexes>
+	<!--Initial time used when computing average residuals in order to adjust
+	    the body's center of mass.  If both initial and final time are set to
+	    -1 (their default value) then the main initial and final time settings
+	    will be used.-->
+	<initial_time_for_com_adjustment>      -1.00000000000000000000 </initial_time_for_com_adjustment>
+	<!--Final time used when computing average residuals in order to adjust
+	    the body's center of mass.-->
+	<final_time_for_com_adjustment>      -1.00000000000000000000 </final_time_for_com_adjustment>
+	<!--Name of the body whose center of mass is adjusted. The heaviest
+	    segment in the model should normally be chosen. For a gait model, the
+	    torso segment is usually the best choice.-->
+	<adjusted_com_body>  </adjusted_com_body>
+	<!--Name of the output model file (.osim) containing adjustments to
+	    anthropometry made to reduce average residuals. This file is written
+	    if the property adjust_com_to_reduce_residuals is set to true. If a
+	    name is not specified, the model is written out to a file called
+	    adjusted_model.osim.-->
+	<output_model_file>  </output_model_file>
+	<!--Flag (true or false) indicating whether or not to adjust the
+	    kinematics in order to reduce residuals.  Set this flag to false, and
+	    set adjust_com_to_reduce_residuals on in order to only adjust the
+	    model's center of mass without adjusting kinematics-->
+	<adjust_kinematics_to_reduce_residuals> true </adjust_kinematics_to_reduce_residuals>
+	<!--True-false flag indicating whether or not to turn on verbose printing
+	    for cmc.-->
+	<use_verbose_printing> true </use_verbose_printing>
+</CMCTool>
+
