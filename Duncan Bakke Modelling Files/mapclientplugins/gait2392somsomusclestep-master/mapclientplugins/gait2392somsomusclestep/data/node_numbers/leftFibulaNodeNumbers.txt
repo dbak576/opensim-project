@@ -1,0 +1,11 @@
+{
+    "bifemlh_l": 8930, 
+    "bifemsh_l": 8930, 
+    "ext_dig_l": 8327, 
+    "ext_hal_l": 43, 
+    "flex_hal_l": 586, 
+    "per_brev_l": 1659, 
+    "per_long_l": 8497, 
+    "per_tert_l": 2695, 
+    "tib_post_l": 1608
+}

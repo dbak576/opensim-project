@@ -1,4 +1,4 @@
-function [resultantData, headerLine, ParameterGroup, leftTrajectory, rightTrajectory, leftStDev, rightStDev] = plotStance(filename, title, number, model, directory, forPlotting) % err = plotStance(IKResults, Walk, 10)
+function [resultantData, headerLine, ParameterGroup, leftTrajectory, rightTrajectory, leftStDev, rightStDev] = plotStance(filename, title, number, model, directory, forPlotting, ParameterGroups) % err = plotStance(IKResults, Walk, 10)
 %plotStance: Plots mean joint angles/moments as a function of stance percentage.
 % Note that forPlotting should contain all string titles of columns for
 % plotting WITHOUT _l OR _r SUFFIXES. These are taken care of by the func.
@@ -9,9 +9,8 @@ if length(forPlotting) < 6;
    forPlotting = {'hip_flexion','hip_adduction','hip_rotation','knee_angle','ankle_angle','subtalar_angle'}; 
 end
 for i = 1:number
-    c3dFilename = strcat(directory,'\',model,'\',title,num2str(i),'\',title,num2str(i),'.c3d');
     dataFilename = strcat(directory,'\',model,'\',title,num2str(i),'\',title,num2str(i),filename);
-    [Markers,MLabels,VideoFrameRate,AnalogSignals,ALabels,AUnits,AnalogFrameRate,Event,ParameterGroup,CameraInfo] = readC3D(c3dFilename);
+    ParameterGroup = ParameterGroups{i};
     heelStrikeTimes(i,1,1:2) = ParameterGroup(7).Parameter(7).data(2,1:2)-(ParameterGroup(1).Parameter(1).data(1)*0.005);
     heelStrikeTimes(i,2,1:2) = ParameterGroup(7).Parameter(7).data(2,3:4)-(ParameterGroup(1).Parameter(1).data(1)*0.005);
     % NOTE THAT heelStrikeTimes (:,1,:) is the SECOND STEP in the

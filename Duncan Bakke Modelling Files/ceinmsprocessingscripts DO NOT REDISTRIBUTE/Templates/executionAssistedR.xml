@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<execution xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:noNamespaceSchemaLocation="execution.xsd">
+  <NMSmodel>
+     <type>
+        <hybrid>
+            <alpha> 1 </alpha>
+            <beta> 2 </beta>
+            <gamma> 50 </gamma>
+            <trackedMuscles>
+                               rect_fem_r vas_med_r vas_lat_r vas_int_r bifemsh_r
+                               glut_min1_r glut_min2_r glut_min3_r glut_med1_r glut_med2_r glut_med3_r
+                               tfl_r add_brev_r add_long_r add_mag1_r add_mag2_r
+                               add_mag3_r grac_r sar_r semiten_r semimem_r bifemlh_r
+                               glut_max1_r glut_max2_r glut_max3_r lat_gas_r med_gas_r soleus_r per_long_r
+                               tib_ant_r per_tert_r per_brev_r
+            </trackedMuscles>
+            <predictedMuscles> psoas_r iliacus_r</predictedMuscles>
+            <algorithm>
+                <simulatedAnnealing>
+                    <noEpsilon>4</noEpsilon>
+                    <rt>0.3</rt>
+                    <T>20</T>
+                    <NS>15</NS>
+                    <NT>5</NT>
+                    <epsilon>1.E-3</epsilon>
+                    <maxNoEval>200000</maxNoEval>
+                </simulatedAnnealing>
+            </algorithm>
+        </hybrid>
+     </type>
+
+     <tendon>
+          <equilibriumElastic>
+            <tolerance>0.000000001</tolerance>
+          </equilibriumElastic>
+     </tendon>
+
+     <activation>
+          <exponential/>
+     </activation>
+  </NMSmodel>
+
+  <online/>
+
+  <elaboratedDoFs>
+  </elaboratedDoFs>
+
+</execution>

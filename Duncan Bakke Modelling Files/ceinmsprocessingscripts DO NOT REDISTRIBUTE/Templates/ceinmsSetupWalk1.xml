@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ceinms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="ceinmsSetup.xsd">
+  <subjectFile>../calibratedSubjects/subjectCalibrated.xml</subjectFile>
+  <inputDataFile>../trials/ISB15/Walk1.xml</inputDataFile>
+  <executionFile>executionOpenloop.xml</executionFile>
+  <excitationGeneratorFile>../excitationGenerators/excitationGenerator16to34R.xml</excitationGeneratorFile>
+  <outputDirectory>outputData/Walk1/</outputDirectory>
+  <contactModelFile>../trials/ISB15/Walk1_contactModelFile.xml</contactModelFile>
+  </ceinms>

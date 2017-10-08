@@ -1,0 +1,6 @@
+
+<RCC>
+  <qresource prefix="trcframeselectorstep">
+    <file>images/trcframeselectoricon.png</file>
+  </qresource>
+</RCC>

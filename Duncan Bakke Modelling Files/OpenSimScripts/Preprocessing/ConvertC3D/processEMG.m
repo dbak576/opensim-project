@@ -1,4 +1,4 @@
-function [proEMG, rectEMG] = processEMG(rawEMG, AnalogRate)
+function [proEMG, rectEMG, lowEMG] = processEMG(rawEMG, AnalogRate)
 % Purpose:  From raw EMG data as input, the method performs the
 %           filtering, rectifying, and normalizing operations needed to
 %           obtain an EMG envelope.

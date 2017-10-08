@@ -1,0 +1,11 @@
+{
+    "flex_dig_l": 391, 
+    "grac_l": 11134, 
+    "sar_l": 11289, 
+    "semimem_l": 13096, 
+    "semiten_l": 11230, 
+    "soleus_l": 10535, 
+    "tfl_l": 14202, 
+    "tib_ant_l": 1271, 
+    "tib_post_l": 2
+}

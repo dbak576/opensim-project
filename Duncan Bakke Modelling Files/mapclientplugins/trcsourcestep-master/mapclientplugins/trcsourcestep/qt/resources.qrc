@@ -1,0 +1,6 @@
+
+<RCC>
+  <qresource prefix="trcsourcestep">
+    <file>images/trcsourceicon.png</file>
+  </qresource>
+</RCC>

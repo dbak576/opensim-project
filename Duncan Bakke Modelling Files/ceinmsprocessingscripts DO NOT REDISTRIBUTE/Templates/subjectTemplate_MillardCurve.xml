@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<subject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="subject.xsd">
+  <mtuDefault>
+    <emDelay>0.015</emDelay>
+    <percentageChange>0.15</percentageChange>
+    <damping>0.1</damping>
+    <curve>
+      <name>activeForceLength</name>
+      <xPoints>0.4241 0.4641 0.5441 0.6241 0.7041 0.7441 0.8641 0.9441 0.9841 1.0641 1.1041 1.2241 1.7841 1.8241</xPoints>
+      <yPoints>0 0.0036 0.2531 0.5362 0.7739 0.8204 0.926 0.9919 1 0.9907 0.9524 0.7902 0.0117 0</yPoints>
+    </curve>
+    <curve>
+      <name>passiveForceLength</name>
+      <xPoints>1 1.116 1.22 1.324 1.428 1.61 2</xPoints>
+      <yPoints>0 0.0208 0.0604 0.1536 0.3117 0.7448 1.8571</yPoints>
+    </curve>
+    <curve>
+      <name>forceVelocity</name>
+      <xPoints>-1 -0.624 -0.312 -0.104 0 0.104 0.312 0.624 0.832 0.988</xPoints>
+      <yPoints>0 0.0939 0.3174 0.6162 1 1.2278 1.2972 1.3507 1.3823 1.4</yPoints>
+    </curve>
+    <curve>
+      <name>tendonForceStrain</name>
+      <xPoints>0 0.01 0.02 0.06 0.1 0.14 0.18 0.24 0.32 0.38 0.42 0.44 0.46 0.48 0.5</xPoints>
+      <yPoints>0 0.094 0.2609 1.3087 2.4311 3.5536 4.676 6.3597 8.6046 10.2883 11.4107 11.9719 12.5332 13.0944 13.6556</yPoints>
+    </curve>
+  </mtuDefault>
+  <mtuSet>
+ <mtu>
+    <name></name>
+    <c1></c1>
+    <c2></c2>
+    <shapeFactor></shapeFactor>
+    <optimalFibreLength></optimalFibreLength>
+    <pennationAngle></pennationAngle>
+    <tendonSlackLength></tendonSlackLength>
+    <maxIsometricForce></maxIsometricForce>
+    <strengthCoefficient></strengthCoefficient>
+  </mtu>
+  </mtuSet>
+  <dofSet>
+    <dof>
+      <name></name>
+      <mtuNameSet></mtuNameSet>
+    </dof>
+  </dofSet>
+  <calibrationInfo>
+    <uncalibrated>
+      <subjectID></subjectID>
+      <additionalInfo></additionalInfo>
+    </uncalibrated>
+  </calibrationInfo>
+</subject>

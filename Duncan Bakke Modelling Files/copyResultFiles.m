@@ -11,32 +11,22 @@ for j = 1:10
             trial = strcat('Walk',j);
             mkdir(fullfile('HJCLoopOutput',strcat('Output',coordString),model),trial);
             curFile = fullFile('HJCLoopOutput',strcat('Output',coordString),model,trial);
-            copyfile(fullfile(pwd,'Output',model,trial,strcat(trial,'IKResults.mot')), curFile);
-            copyfile(fullfile(pwd,'Output',model,trial,strcat(trial,'IDResults.sto')), curFile);
-            copyfile(fullfile(pwd,'Output',model,trial,strcat(trial,'.c3d')), curFile);
-            %TO DO: Copy over muscle force data
+            copyfile(fullfile(pwd,'Output',model,trial), curFile);
         end
     elseif modelNum == 26
         if j < 10
             trial = strcat('Walk',j);
             mkdir(fullfile('HJCLoopOutput',strcat('Output',coordString),model),trial);
             curFile = fullFile('HJCLoopOutput',strcat('Output',coordString),model,trial);
-            copyfile(fullfile(pwd,'Output',model,trial,strcat(trial,'IKResults.mot')), curFile);
-            copyfile(fullfile(pwd,'Output',model,trial,strcat(trial,'IDResults.sto')), curFile);
-            copyfile(fullfile(pwd,'Output',model,trial,strcat(trial,'.c3d')), curFile);
-            %TO DO: Copy over muscle force data
+            copyfile(fullfile(pwd,'Output',model,trial), curFile);
         end
     else
         trial = strcat('Walk',num2str(j));
         mkdir(fullfile('HJCLoopOutput',strcat('Output',coordString),model),trial);
         curFile = fullfile('HJCLoopOutput',strcat('Output',coordString),model,trial);
-        copyfile(fullfile(pwd,'Output',model,trial,strcat(trial,'IKResults.mot')), curFile);
-        copyfile(fullfile(pwd,'Output',model,trial,strcat(trial,'IDResults.sto')), curFile);
-        copyfile(fullfile(pwd,'Output',model,trial,strcat(trial,'.c3d')), curFile);
-        %TO DO: Copy over muscle force data
+        copyfile(fullfile(pwd,'Output',model,trial), curFile);
     end
 end
-
-
+clear variables
 end
 

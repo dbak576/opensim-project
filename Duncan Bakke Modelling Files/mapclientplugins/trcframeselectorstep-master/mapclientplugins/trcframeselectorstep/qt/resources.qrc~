@@ -1,0 +1,6 @@
+
+<RCC>
+  <qresource prefix="landmarksjoinerstep">
+    <file>images/landmarksjoinericon.png</file>
+  </qresource>
+</RCC>

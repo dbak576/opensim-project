@@ -1,0 +1,6 @@
+{
+    "rect_fem_r": 301, 
+    "vas_int_r": 472, 
+    "vas_lat_r": 2848, 
+    "vas_med_r": 2310
+}

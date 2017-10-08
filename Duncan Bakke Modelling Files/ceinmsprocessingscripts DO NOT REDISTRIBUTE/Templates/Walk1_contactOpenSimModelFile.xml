@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<contactModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:noNamespaceSchemaLocation="contactModel.xsd">
+
+<fromOpenSim>
+<osimModel>../../../staticElaborations/Static_C01s1/ISB15/C01s1_LLM_HipOA_MP.osim</osimModel>
+<motion>../../../inverseKinematics/ISB15/Walk1/ik.mot</motion>
+<externalLoads>../../../inverseDynamics/ISB15/Walk1/Setup/external_loads.xml</externalLoads>
+<joints>hip_l ankle_l</joints>
+</fromOpenSim>
+
+</contactModel>
